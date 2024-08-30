@@ -38,6 +38,7 @@ public class EmpleadoDTO {
         empleado.setNombre(this.getNombre());
         empleado.setApellido(this.getApellido());
         empleado.setEmail(this.getEmail());
+        empleado.setNroDocumento((this.getNroDocumento()));
         empleado.setFechaNacimiento(this.getFechaNacimiento());
         empleado.setFechaIngreso(this.getFechaIngreso());
         empleado.setFechaCreacion(this.getFechaCreacion());
@@ -50,6 +51,7 @@ public class EmpleadoDTO {
         dto.setNombre(this.getNombre());
         dto.setApellido(this.getApellido());
         dto.setEmail(this.getEmail());
+        dto.setNroDocumento((this.getNroDocumento()));
         dto.setFechaNacimiento(this.getFechaNacimiento());
         dto.setFechaIngreso(this.getFechaIngreso());
         dto.setFechaCreacion(this.getFechaCreacion());
