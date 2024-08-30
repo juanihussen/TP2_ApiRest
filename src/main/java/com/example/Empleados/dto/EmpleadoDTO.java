@@ -2,6 +2,9 @@ package com.example.Empleados.dto;
 
 import com.example.Empleados.entity.Empleado;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -15,13 +18,18 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmpleadoDTO {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long nroDocumento;
     private String nombre;
     private String apellido;
     private String email;
     private LocalDate fechaNacimiento;
     private LocalDate fechaIngreso;
+    private LocalDate fechaCreacion;
 
 
     public  Empleado toEntity() {
@@ -32,6 +40,7 @@ public class EmpleadoDTO {
         empleado.setEmail(this.getEmail());
         empleado.setFechaNacimiento(this.getFechaNacimiento());
         empleado.setFechaIngreso(this.getFechaIngreso());
+        empleado.setFechaCreacion(this.getFechaCreacion());
         return empleado;
     }
 
@@ -43,6 +52,7 @@ public class EmpleadoDTO {
         dto.setEmail(this.getEmail());
         dto.setFechaNacimiento(this.getFechaNacimiento());
         dto.setFechaIngreso(this.getFechaIngreso());
+        dto.setFechaCreacion(this.getFechaCreacion());
         return dto;
     }
 }

@@ -11,13 +11,12 @@ import java.util.Optional;
 
 public interface IEmpleadoService {
 
+    // List<Empleado> findAllEmpleados();
 
-    List<Empleado> findAllEmpleados();
-
-    Optional<Empleado> findEmpleadosById(Long id);
+    // Optional<Empleado> findEmpleadosById(Long id);
 
     ResponseEntity<?> altaEmpleado(EmpleadoDTO empleadoDTO);
 
-    void deleteEmpleadoById(Long id);
+    // void deleteEmpleadoById(Long id);
 
 }
