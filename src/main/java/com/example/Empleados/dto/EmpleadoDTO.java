@@ -34,7 +34,6 @@ public class EmpleadoDTO {
     private LocalDate fechaIngreso;
     private LocalDate fechaCreacion;
 
-
     public  Empleado toEntity() {
         Empleado empleado = new Empleado();
         empleado.setId(this.getId());

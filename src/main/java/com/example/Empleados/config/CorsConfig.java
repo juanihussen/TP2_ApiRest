@@ -13,9 +13,9 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")  // Permite todas las rutas
-                        .allowedOrigins("http://localhost:3000")  // Cambia esto por la URL de tu frontend
-                        .allowedOrigins("https://neorislab.stoplight.io")  // Cambia esto por la URL de tu frontend
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:3000")
+                        .allowedOrigins("https://neorislab.stoplight.io")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);

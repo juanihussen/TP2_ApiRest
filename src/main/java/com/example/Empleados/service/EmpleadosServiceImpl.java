@@ -28,8 +28,11 @@ public class EmpleadosServiceImpl implements IEmpleadoService{
         Empleado empleado = empeladoDTO.toEntity();
         //validaciones
         validator.validarEdad(empleado.getFechaNacimiento());
-
-
+        validator.validarDocumentoUnico(empleado.getNroDocumento());
+        validator.validarEmail(empleado.getEmail());
+        validator.validarFechas(empleado.getFechaIngreso(),empleado.getFechaNacimiento());
+        validator.validarSoloLetrasEnNombreYApellido("nombre",empleado.getNombre());
+        validator.validarSoloLetrasEnNombreYApellido("apellido",empleado.getApellido());
         empleado = this.repository.save(empleado);
     }
 }
