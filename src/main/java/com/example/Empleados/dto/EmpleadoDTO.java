@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -26,6 +27,8 @@ public class EmpleadoDTO {
     private Long nroDocumento;
     private String nombre;
     private String apellido;
+
+    @Email(message = "El email ingresado no es correcto.")
     private String email;
     private LocalDate fechaNacimiento;
     private LocalDate fechaIngreso;
