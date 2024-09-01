@@ -1,5 +1,1 @@
-APRENDER:
-1- CrudRepository -> JPARespository
-2- ExceptionHandler (Anotacion Spring Boot)
-3- Cree exceptiones pero necesito que sean globales y retornen los tipos de conflicos al servidor. (ver en youtube)
-3.5- Crear excepcion para formato de Email y BAD REQUEST "DE DONDE ES"
+1 - ARREGLAR PUNTO 3 NO TOMA LA EXCEPCION NI MUESTRA EL JSON

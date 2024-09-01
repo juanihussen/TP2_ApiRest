@@ -1,9 +1,11 @@
 package com.example.Empleados.entity;
 
+import com.example.Empleados.dto.EmpleadoDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -36,6 +38,26 @@ public class Empleado {
     @Column(name = "fecha_ingreso")
     private LocalDate fechaIngreso;
 
-    @Column(name = "fecha_creacion")
-    private LocalDate fechaCreacion;
+    @Column(name = "fecha_creacion", updatable = false)
+    private LocalDateTime fechaCreacion;
+
+
+    @PrePersist
+    protected void onCreate() {
+        this.fechaCreacion = LocalDateTime.now();
+    }
+
+    public EmpleadoDTO toDTO() {
+        EmpleadoDTO dto = new EmpleadoDTO();
+        dto.setEmpleadoId(this.getId());
+        dto.setNombre(this.getNombre());
+        dto.setApellido(this.getApellido());
+        dto.setEmail(this.getEmail());
+        dto.setNroDocumento((this.getNroDocumento()));
+        dto.setFechaNacimiento(this.getFechaNacimiento());
+        dto.setFechaIngreso(this.getFechaIngreso());
+        dto.setFechaCreacion(this.getFechaCreacion());
+        return dto;
+    }
+
 }

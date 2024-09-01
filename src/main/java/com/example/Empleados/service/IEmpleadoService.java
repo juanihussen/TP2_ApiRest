@@ -12,11 +12,13 @@ import java.util.Optional;
 
 public interface IEmpleadoService {
 
-    // List<Empleado> findAllEmpleados();
+    List<EmpleadoDTO> findAllEmpleados();
 
-    // Optional<Empleado> findEmpleadosById(Long id);
+    EmpleadoDTO findEmpleadoById(Long id);
 
     void altaEmpleado(EmpleadoDTO empleadoDTO) throws BadRequestException;
+
+    EmpleadoDTO updateEmpleado(Long id);
 
     // void deleteEmpleadoById(Long id);
 

@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 
 
 @Setter
@@ -22,8 +22,7 @@ public class EmpleadoDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private Long empleadoId;
     private Long nroDocumento;
     private String nombre;
     private String apellido;
@@ -32,11 +31,11 @@ public class EmpleadoDTO {
     private String email;
     private LocalDate fechaNacimiento;
     private LocalDate fechaIngreso;
-    private LocalDate fechaCreacion;
+    private LocalDateTime fechaCreacion;
 
     public  Empleado toEntity() {
         Empleado empleado = new Empleado();
-        empleado.setId(this.getId());
+        empleado.setId(this.getEmpleadoId());
         empleado.setNombre(this.getNombre());
         empleado.setApellido(this.getApellido());
         empleado.setEmail(this.getEmail());
@@ -45,19 +44,6 @@ public class EmpleadoDTO {
         empleado.setFechaIngreso(this.getFechaIngreso());
         empleado.setFechaCreacion(this.getFechaCreacion());
         return empleado;
-    }
-
-    public EmpleadoDTO toDTO() {
-        EmpleadoDTO dto = new EmpleadoDTO();
-        dto.setId(this.getId());
-        dto.setNombre(this.getNombre());
-        dto.setApellido(this.getApellido());
-        dto.setEmail(this.getEmail());
-        dto.setNroDocumento((this.getNroDocumento()));
-        dto.setFechaNacimiento(this.getFechaNacimiento());
-        dto.setFechaIngreso(this.getFechaIngreso());
-        dto.setFechaCreacion(this.getFechaCreacion());
-        return dto;
     }
 }
 

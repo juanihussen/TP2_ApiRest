@@ -2,8 +2,7 @@ package com.example.Empleados.validator;
 import com.example.Empleados.exceptions.ConflictException;
 import com.example.Empleados.repository.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Component;
@@ -18,13 +17,15 @@ public class EmpleadoValidator {
     @Autowired
     private EmpleadoRepository repository;
 
+
+    //H001 validations
     public void validarEdad(LocalDate fechaNacimiento) throws BadRequestException {
         if(fechaNacimiento == null){
             throw new BadRequestException("Es necesarop que coloques una fecha de nacimiento.");
         } else {
             int edadEmpleado = Period.between(fechaNacimiento, LocalDate.now()).getYears();
             if (edadEmpleado < 18) {
-                throw new BadRequestException("El empleado no puede ser menor a 18 años. ");
+                throw new ConflictException("La edad del empleado no puede ser menor a 18 años.");
             }
         }
     }
@@ -62,30 +63,12 @@ public class EmpleadoValidator {
         }
     }
 
-    /*
-    public void formatoMailIngresado (String emailEmpleado) {
-
-    }
-     */
-
     public void validarSoloLetrasEnNombreYApellido(String campo, String valor) throws BadRequestException {
         Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
         if (!pattern.matcher(valor).matches()) {
             throw new BadRequestException("Solo se permiten letras en el campo '" + campo + "'");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
