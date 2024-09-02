@@ -5,7 +5,6 @@ import com.example.Empleados.service.IEmpleadoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.apache.coyote.BadRequestException;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,11 +32,18 @@ public class EmpleadoController {
         return ResponseEntity.ok(empleados);
     }
 
-    @GetMapping(value = "/empleado/{empleadoId}")
-    public ResponseEntity<?> findEmpleadoById(@NotNull @PathVariable("empleadoId") Long id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<EmpleadoDTO> findEmpleadoById(@NotNull @PathVariable("id") Long id) {
         EmpleadoDTO empleadoDTO = this.empleadoService.findEmpleadoById(id);
         return ResponseEntity.ok(empleadoDTO);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<EmpleadoDTO> updateEmpleado(@Valid @RequestBody EmpleadoDTO empleadoDTO, @NotNull @PathVariable("id") Long id) throws BadRequestException {
+        EmpleadoDTO empleadoActualizadoDTO = this.empleadoService.updateEmpleado(empleadoDTO, id);
+        return ResponseEntity.ok(empleadoActualizadoDTO);
+    }
+
 
 }
 

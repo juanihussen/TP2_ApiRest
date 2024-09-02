@@ -10,6 +10,8 @@ public interface EmpleadoRepository extends JpaRepository<Empleado,Long> {
 
     boolean existsByNroDocumento(Long nroDocumento);
 
+    boolean existsById(Long id);
+
     boolean existsByEmail(String email);
 
 }

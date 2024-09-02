@@ -15,13 +15,10 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Builder
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmpleadoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long empleadoId;
     private Long nroDocumento;
     private String nombre;

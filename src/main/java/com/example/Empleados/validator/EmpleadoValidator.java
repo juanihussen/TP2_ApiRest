@@ -30,23 +30,28 @@ public class EmpleadoValidator {
         }
     }
 
-    public void validarDocumentoUnico(Long documentoEmpleado) {
+    public void validarDocumentoNotNull(Long documentoEmpleado) {
         if(documentoEmpleado == null){
             throw new ConflictException("Es necesario que ingrese un numero de documento para crear un empleado. ");
-        } else {
-            if (repository.existsByNroDocumento(documentoEmpleado)){
-                throw new ConflictException("Ya existe un empleado con el documento ingresado. ");
-            }
         }
     }
 
-    public void validarEmail(String emailEmpleado) {
+    public void validarEmailUnico(String emailEmpleado){
+        if (repository.existsByEmail(emailEmpleado)){
+            throw new ConflictException("Ya existe un empleado con el email ingresado. ");
+        }
+    }
+
+    public void validarDocumentoUnico(Long documentoEmpleado){
+        if (repository.existsByNroDocumento(documentoEmpleado)){
+            throw new ConflictException("Ya existe un empleado con el documento ingresado. ");
+        }
+    }
+
+
+    public void validarEmailNotNull(String emailEmpleado) {
         if(emailEmpleado == null){
             throw new ConflictException("Es necesario que ingrese un email para crear un empleado. ");
-        } else {
-            if (repository.existsByEmail(emailEmpleado)){
-                throw new ConflictException("Ya existe un empleado con el email ingresado. ");
-            }
         }
     }
 

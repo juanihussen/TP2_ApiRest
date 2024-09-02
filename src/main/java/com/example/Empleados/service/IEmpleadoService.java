@@ -2,6 +2,7 @@ package com.example.Empleados.service;
 
 import com.example.Empleados.dto.EmpleadoDTO;
 import com.example.Empleados.entity.Empleado;
+import com.example.Empleados.exceptions.ConflictException;
 import org.apache.coyote.BadRequestException;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,8 @@ public interface IEmpleadoService {
 
     void altaEmpleado(EmpleadoDTO empleadoDTO) throws BadRequestException;
 
-    EmpleadoDTO updateEmpleado(Long id);
+    EmpleadoDTO updateEmpleado(EmpleadoDTO empleadoDTO,Long id) throws BadRequestException;
 
-    // void deleteEmpleadoById(Long id);
+    void deleteEmpleadoById(Long id);
 
 }
