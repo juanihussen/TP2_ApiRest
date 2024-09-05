@@ -11,7 +11,6 @@ public class ConflictException extends RuntimeException {
         super(message);
         this.status = HttpStatus.CONFLICT;
     }
-
 }
 
 

@@ -1,9 +1,7 @@
 package com.example.Empleados.validator;
 import com.example.Empleados.exceptions.ConflictException;
-import com.example.Empleados.repository.EmpleadoRepository;
+import com.example.Empleados.repository.empleado.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +19,7 @@ public class EmpleadoValidator {
     //H001 validations
     public void validarEdad(LocalDate fechaNacimiento) throws BadRequestException {
         if(fechaNacimiento == null){
-            throw new BadRequestException("Es necesarop que coloques una fecha de nacimiento.");
+            throw new com.example.Empleados.exceptions.CustomBadRequestException("Es necesarop que coloques una fecha de nacimiento.");
         } else {
             int edadEmpleado = Period.between(fechaNacimiento, LocalDate.now()).getYears();
             if (edadEmpleado < 18) {
@@ -30,7 +28,7 @@ public class EmpleadoValidator {
         }
     }
 
-    public void validarDocumentoNotNull(Long documentoEmpleado) {
+    public void validarDocumentoNotNull(Integer documentoEmpleado) {
         if(documentoEmpleado == null){
             throw new ConflictException("Es necesario que ingrese un numero de documento para crear un empleado. ");
         }
@@ -42,7 +40,7 @@ public class EmpleadoValidator {
         }
     }
 
-    public void validarDocumentoUnico(Long documentoEmpleado){
+    public void validarDocumentoUnico(Integer documentoEmpleado){
         if (repository.existsByNroDocumento(documentoEmpleado)){
             throw new ConflictException("Ya existe un empleado con el documento ingresado. ");
         }

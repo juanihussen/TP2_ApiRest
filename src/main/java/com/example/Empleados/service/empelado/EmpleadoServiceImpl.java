@@ -1,28 +1,20 @@
-package com.example.Empleados.service;
+package com.example.Empleados.service.empelado;
 
 import com.example.Empleados.dto.EmpleadoDTO;
 import com.example.Empleados.entity.Empleado;
-import com.example.Empleados.exceptions.ConflictException;
 import com.example.Empleados.exceptions.NotFoundException;
-import com.example.Empleados.repository.EmpleadoRepository;
+import com.example.Empleados.repository.empleado.EmpleadoRepository;
 import com.example.Empleados.validator.EmpleadoValidator;
-import jakarta.validation.Validator;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 import org.apache.coyote.BadRequestException;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class EmpleadosServiceImpl implements IEmpleadoService{
+public class EmpleadoServiceImpl implements IEmpleadoService {
 
     @Autowired
     EmpleadoRepository repository;
@@ -46,12 +38,11 @@ public class EmpleadosServiceImpl implements IEmpleadoService{
         }
     }
 
-
     @Override
     public void altaEmpleado(EmpleadoDTO empleadoDTO) throws BadRequestException {
         Empleado empleado = empleadoDTO.toEntity();
         validarEmpleado(empleado);
-        empleado = this.repository.save(empleado);
+        this.repository.save(empleado);
     }
 
     @Override
@@ -85,12 +76,6 @@ public class EmpleadosServiceImpl implements IEmpleadoService{
         return empleadoEncontrado.toDTO();
     }
 
-    @Override
-    public void deleteEmpleadoById(Long id) {
-
-    }
-
-
     public void validarEmpleado(Empleado empleado) throws BadRequestException {
         validator.validarEmailUnico(empleado.getEmail());
         validator.validarEmailNotNull(empleado.getEmail());
@@ -101,6 +86,5 @@ public class EmpleadosServiceImpl implements IEmpleadoService{
         validator.validarSoloLetrasEnNombreYApellido("nombre",empleado.getNombre());
         validator.validarSoloLetrasEnNombreYApellido("apellido",empleado.getApellido());
     }
-
 
 }

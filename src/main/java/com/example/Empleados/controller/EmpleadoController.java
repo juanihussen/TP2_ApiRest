@@ -1,7 +1,7 @@
 package com.example.Empleados.controller;
 
 import com.example.Empleados.dto.EmpleadoDTO;
-import com.example.Empleados.service.IEmpleadoService;
+import com.example.Empleados.service.empelado.IEmpleadoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.apache.coyote.BadRequestException;

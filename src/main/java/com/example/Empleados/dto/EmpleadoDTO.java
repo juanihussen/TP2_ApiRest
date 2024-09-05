@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class EmpleadoDTO {
 
     private Long empleadoId;
-    private Long nroDocumento;
+    private Integer nroDocumento;
     private String nombre;
     private String apellido;
 
@@ -36,7 +36,7 @@ public class EmpleadoDTO {
         empleado.setNombre(this.getNombre());
         empleado.setApellido(this.getApellido());
         empleado.setEmail(this.getEmail());
-        empleado.setNroDocumento((this.getNroDocumento()));
+        empleado.setNroDocumento(this.getNroDocumento());
         empleado.setFechaNacimiento(this.getFechaNacimiento());
         empleado.setFechaIngreso(this.getFechaIngreso());
         empleado.setFechaCreacion(this.getFechaCreacion());

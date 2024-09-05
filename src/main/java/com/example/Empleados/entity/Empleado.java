@@ -21,7 +21,7 @@ public class Empleado {
     private Long id;
 
     @Column(name = "nro_documento")
-    private Long nroDocumento;
+    private Integer nroDocumento;
 
     @Column(length = 30, nullable = false)
     private String nombre;
@@ -40,7 +40,6 @@ public class Empleado {
 
     @Column(name = "fecha_creacion", updatable = false)
     private LocalDateTime fechaCreacion;
-
 
     @PrePersist
     protected void onCreate() {

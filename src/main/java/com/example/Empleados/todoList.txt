@@ -1,1 +1,1 @@
-1 - NO TIRA LA EXCEPCION DE CONFLICT , tira ERROR 500 Server Internal Problem
+1 - CONDICION DE NO NULL EN MOSTRAR TODA LA LISTA DE CONCEPTOS (La misma que ya se aplico para las otras dos condiciones)
