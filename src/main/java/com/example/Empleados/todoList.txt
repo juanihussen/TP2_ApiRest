@@ -1,1 +1,2 @@
-1 - CONDICION DE NO NULL EN MOSTRAR TODA LA LISTA DE CONCEPTOS (La misma que ya se aplico para las otras dos condiciones)
+HACER VALIDACIONES HU007
+Problema Tipo de Dato

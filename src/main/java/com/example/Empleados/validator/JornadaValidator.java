@@ -10,12 +10,17 @@ import com.example.Empleados.repository.concepto.ConceptoRepository;
 import com.example.Empleados.repository.empleado.EmpleadoRepository;
 import com.example.Empleados.repository.jornadas.JornadasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Component
 public class JornadaValidator {
@@ -28,6 +33,8 @@ public class JornadaValidator {
 
     @Autowired
     private JornadasRepository jornadasRepository;
+
+
 
     public void validarCamposRequeridos(JornadaRequest requestDTO){
         if(requestDTO.getIdEmpleado() == null){
@@ -231,4 +238,36 @@ public class JornadaValidator {
             throw new CustomBadRequestException("El empleado ya tiene registrado una jornada con este concepto en la fecha ingresada.");
         }
     }
+
+
+    //validationGetMapping
+
+    public void validarFechaDesdeMenoraFechaHasta(LocalDate fechaDesde, LocalDate fechaHasta) {
+        if(fechaDesde != null && fechaHasta != null) {
+            if(fechaDesde.isAfter(fechaHasta)) {
+                throw new CustomBadRequestException("El campo ‘fechaDesde’ no puede ser mayor que ‘fechaHasta’.");
+            }
+        }
+    }
+
+    public void validarTipoDatoNroDocumento(String nroDocumento) {
+        if (!Pattern.matches("\\d+", nroDocumento)) {
+            throw new CustomBadRequestException("El campo 'nroDocumento' solo puede contener números enteros.");
+        }
+    }
+
+    public void validarFormatoFechas(@RequestParam(required = false) LocalDate fechaDesde, LocalDate fechaHasta) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        if(fechaDesde == null || fechaHasta == null){
+            throw new CustomBadRequestException("Los campos ‘fechaDesde’ y ‘fechaHasta’ deben respetar el formato yyyy-mm-dd.");
+        }
+    }
+
+
+
+
+
+
+
+
 }

@@ -3,6 +3,7 @@ package com.example.Empleados.dto;
 import com.example.Empleados.entity.Concepto;
 import com.example.Empleados.entity.Empleado;
 import com.example.Empleados.entity.JornadaLaboral;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class JornadaLaboralDTO {
 
     private Long id;
@@ -31,6 +33,7 @@ public class JornadaLaboralDTO {
         dto.setFecha(jornadaLaboral.getFecha());
         dto.setConcepto(jornadaLaboral.getConcepto().getNombre());
         dto.setHsTrabajadas(jornadaLaboral.getHorasTrabajadas());
+        dto.setHsTrabajadas(jornadaLaboral.getHorasTrabajadas() != null ? jornadaLaboral.getHorasTrabajadas() : null);
         return dto;
     }
 

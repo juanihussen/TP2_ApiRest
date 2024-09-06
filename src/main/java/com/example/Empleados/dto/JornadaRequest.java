@@ -39,13 +39,9 @@ public class JornadaRequest {
 
         jornadaLaboral.setEmpleado(empleado);
         jornadaLaboral.setConcepto(concepto);
-        jornadaLaboral.setFecha(this.getFecha()); // Usando los valores del DTO
+        jornadaLaboral.setFecha(this.getFecha());
         jornadaLaboral.setHorasTrabajadas(this.getHorasTrabajadas());
 
         return jornadaLaboral;
     }
-
-
-
-
 }
