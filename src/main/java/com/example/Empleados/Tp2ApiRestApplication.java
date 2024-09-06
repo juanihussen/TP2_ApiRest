@@ -8,5 +8,4 @@ public class Tp2ApiRestApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(Tp2ApiRestApplication.class, args);
 	}
-
 }

@@ -1,6 +1,6 @@
 package com.example.Empleados.validator;
 
-import com.example.Empleados.dto.JornadaRequestDTO;
+import com.example.Empleados.dto.JornadaRequest;
 import com.example.Empleados.entity.Concepto;
 import com.example.Empleados.entity.Empleado;
 import com.example.Empleados.entity.JornadaLaboral;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -30,7 +29,7 @@ public class JornadaValidator {
     @Autowired
     private JornadasRepository jornadasRepository;
 
-    public void validarCamposRequeridos(JornadaRequestDTO requestDTO){
+    public void validarCamposRequeridos(JornadaRequest requestDTO){
         if(requestDTO.getIdEmpleado() == null){
             throw new CustomBadRequestException("Es necesario que ingrese el id de algun empleado. ");
         }
@@ -42,90 +41,97 @@ public class JornadaValidator {
         }
     }
 
-    public void validarTurnosSinHorasTrabajadas(JornadaRequestDTO requestDTO) {
+    public void validarTurnosSinHorasTrabajadas(JornadaRequest requestDTO) {
         Optional<Concepto> concepto = conceptoRepository.findById(requestDTO.getIdConcepto());
 
-        if((concepto.get().getNombre().equals("Turno Normal") || concepto.get().getNombre().equals("Turno Extra")) && (requestDTO.getHorasTrabajadas() == null || requestDTO.getHorasTrabajadas() == 0)){
+        if(concepto.get().getId() != 3 && (requestDTO.getHorasTrabajadas() == null || requestDTO.getHorasTrabajadas() == 0)){
             throw new CustomBadRequestException("hsTrabajadas’ es obligatorio para el concepto ingresado. ");
         }
     }
 
-    public void validarHorasDiaLibre(JornadaRequestDTO requestDTO) {
+    public void validarHorasDiaLibre(JornadaRequest requestDTO) {
         Optional<Concepto> concepto = conceptoRepository.findById(requestDTO.getIdConcepto());
-        if(concepto.get().getNombre().equals("Día Libre") && (requestDTO.getHorasTrabajadas() != null)){
+        if(concepto.get().getId() == 3 && (requestDTO.getHorasTrabajadas() != null)){
             throw new CustomBadRequestException("El concepto ingresado no requiere el ingreso de hsTrabajadas.");
         }
     }
 
-    public Optional<Empleado> findEmpleadoById(Long id) {
-        if (!empleadoRepository.existsById(id)) {
+    public Empleado findEmpleadoById(Long id) {
+        Optional<Empleado> empleado = empleadoRepository.findById(id);
+        if(empleado.isEmpty()){
             throw new NotFoundException("No existe el empleado ingresado.");
-        }else{
-            Optional<Empleado> empleado = empleadoRepository.findById(id);
-            return empleado;
         }
+        return empleado.get();
+
     }
 
-    public Optional<Concepto> findConceptoById(Integer id) {
-        if (!conceptoRepository.existsById(id)) {
+    public Concepto findConceptoById(Integer id) {
+        Optional<Concepto> concepto = conceptoRepository.findById(id);
+        if(concepto.isEmpty()){
             throw new NotFoundException("No existe el concepto ingresado.");
-        }else{
-            Optional<Concepto> concepto = conceptoRepository.findById(id);
-            return concepto;
         }
+        return concepto.get();
     }
 
     //1
-    public void validarRangoHorasIngresadas(JornadaRequestDTO requestDTO) {
+    public void validarRangoHorasIngresadas(JornadaRequest requestDTO) {
         Optional<Concepto> concepto = conceptoRepository.findById(requestDTO.getIdConcepto());
 
-        if(concepto.get().getHsMAximo() < requestDTO.getHorasTrabajadas() || concepto.get().getHsMinimo() > requestDTO.getHorasTrabajadas()) {
-            throw new CustomBadRequestException("El rango de horas que se puede cargar para este concepto es de minimo : "  +  concepto.get().getHsMinimo() + " y maximo : " + concepto.get().getHsMAximo() );
+        if(requestDTO.getIdConcepto() != 3) {
+            if(concepto.get().getHsMAximo() < requestDTO.getHorasTrabajadas() || concepto.get().getHsMinimo() > requestDTO.getHorasTrabajadas()) {
+                throw new CustomBadRequestException("El rango de horas que se puede cargar para este concepto es de minimo : "  +  concepto.get().getHsMinimo() + " y maximo : " + concepto.get().getHsMAximo() );
+            }
         }
     }
 
     //2
-    public void validarHorasTotalesDia(JornadaRequestDTO requestDTO) {
+    public void validarHorasTotalesDia(JornadaRequest requestDTO) {
         Optional<Empleado> empleado = empleadoRepository.findById(requestDTO.getIdEmpleado());
 
-        int horasRegistradas = jornadasRepository.sumarHorasTrabajadasPorEmpleadoYFecha(empleado.get().getId(), requestDTO.getFecha()).orElse(0);
+        if(requestDTO.getIdConcepto() != 3){
+            int horasRegistradas = jornadasRepository.sumarHorasTrabajadasPorEmpleadoYFecha(empleado.get().getId(), requestDTO.getFecha()).orElse(0);
 
-        int totalHoras = horasRegistradas + requestDTO.getHorasTrabajadas();
+            int totalHoras = horasRegistradas + requestDTO.getHorasTrabajadas();
 
-        if (totalHoras > 14) {
-            throw new CustomBadRequestException("Un empleado no puede cargar más de 14 horas trabajadas en un día.");
+            if (totalHoras > 14) {
+                throw new CustomBadRequestException("Un empleado no puede cargar más de 14 horas trabajadas en un día.");
+            }
         }
     }
 
     //3 Y 4
-    public void validarHorasSemanalesYMensuales(JornadaRequestDTO requestDTO) {
-        Optional<Empleado> empleado = empleadoRepository.findById(requestDTO.getIdEmpleado());
+    public void validarHorasSemanalesYMensuales(JornadaRequest requestDTO) {
 
-        LocalDate fecha = requestDTO.getFecha();
-        int horasIngresadas = requestDTO.getHorasTrabajadas();
+        if(requestDTO.getIdConcepto() != 3){
+            Optional<Empleado> empleado = empleadoRepository.findById(requestDTO.getIdEmpleado());
 
-        LocalDate comienzoSemana = fecha.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        LocalDate finalSemana = fecha.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
-        LocalDate comienzoMes = fecha.with(TemporalAdjusters.firstDayOfMonth());
-        LocalDate findMes = fecha.with(TemporalAdjusters.lastDayOfMonth());
+            LocalDate fecha = requestDTO.getFecha();
+            int horasIngresadas = requestDTO.getHorasTrabajadas();
 
-        int horasSemanales = jornadasRepository.sumarHorasTrabajadasPorEmpleadoYSemana(empleado.get().getId(), comienzoSemana, finalSemana)
-                .orElse(0) + horasIngresadas;
+            LocalDate comienzoSemana = fecha.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+            LocalDate finalSemana = fecha.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+            LocalDate comienzoMes = fecha.with(TemporalAdjusters.firstDayOfMonth());
+            LocalDate findMes = fecha.with(TemporalAdjusters.lastDayOfMonth());
 
-        int horasMensuales = jornadasRepository
-                .sumarHorasTrabajadasPorEmpleadoYMes(empleado.get().getId(), comienzoMes, findMes)
-                .orElse(0) + horasIngresadas;
+            int horasSemanales = jornadasRepository.sumarHorasTrabajadasPorEmpleadoYSemana(empleado.get().getId(), comienzoSemana, finalSemana)
+                    .orElse(0) + horasIngresadas;
 
-        if (horasSemanales > 52) {
-            throw new CustomBadRequestException("El empleado ingresado supera las 52 horas semanales.");
+            int horasMensuales = jornadasRepository
+                    .sumarHorasTrabajadasPorEmpleadoYMes(empleado.get().getId(), comienzoMes, findMes)
+                    .orElse(0) + horasIngresadas;
+
+            if (horasSemanales > 52) {
+                throw new CustomBadRequestException("El empleado ingresado supera las 52 horas semanales.");
+            }
+            if (horasMensuales > 190) {
+                throw new CustomBadRequestException("El empleado ingresado supera las 190 horas mensuales.");
+            }
         }
-        if (horasMensuales > 190) {
-            throw new CustomBadRequestException("El empleado ingresado supera las 190 horas mensuales.");
-        }
+
     }
 
     // 5
-    public void validarDiaLibreEnFecha(JornadaRequestDTO requestDTO) {
+    public void validarDiaLibreEnFecha(JornadaRequest requestDTO) {
         Optional<Empleado> empleado = empleadoRepository.findById(requestDTO.getIdEmpleado());
 
         JornadaLaboral jornadaExistente = jornadasRepository.findByEmpleadoIdAndFecha(empleado.get().getId(), requestDTO.getFecha());
@@ -135,8 +141,22 @@ public class JornadaValidator {
         }
     }
 
+    // 5.5
+    public void validarDiaLibreEnFechaLuegoDeTurno(JornadaRequest requestDTO) {
+        Optional<Empleado> empleado = empleadoRepository.findById(requestDTO.getIdEmpleado());
+        JornadaLaboral jornadaExistente = jornadasRepository.findByEmpleadoIdAndFecha(empleado.get().getId(), requestDTO.getFecha());
+
+        if(jornadaExistente != null) {
+            if ((jornadaExistente.getConcepto().getId() == 1 || jornadaExistente.getConcepto().getId() == 2) && requestDTO.getIdConcepto() == 3) {
+                throw new CustomBadRequestException("No se puede ingresar un Dia Libre luego de haber ingresado un turno previamente. ");
+            }
+        }
+
+    }
+
+
     // 6 y 7
-    public void validarMaximoTurnosEnSemana(JornadaRequestDTO requestDTO) {
+    public void validarMaximoTurnosEnSemana(JornadaRequest requestDTO) {
         Optional<Empleado> empleado = empleadoRepository.findById(requestDTO.getIdEmpleado());
 
         LocalDate fechaTurno = requestDTO.getFecha();
@@ -156,7 +176,7 @@ public class JornadaValidator {
     }
 
     // 8
-    public void validarMaximoDiasLibresEnSemana(JornadaRequestDTO requestDTO) {
+    public void validarMaximoDiasLibresEnSemana(JornadaRequest requestDTO) {
         Optional<Empleado> empleado = empleadoRepository.findById(requestDTO.getIdEmpleado());
 
         LocalDate fechaTurno = requestDTO.getFecha();
@@ -171,7 +191,7 @@ public class JornadaValidator {
     }
 
     // 9
-    public void validarMaximoDiasLibresEnMes(JornadaRequestDTO requestDTO) {
+    public void validarMaximoDiasLibresEnMes(JornadaRequest requestDTO) {
         Optional<Empleado> empleado = empleadoRepository.findById(requestDTO.getIdEmpleado());
 
         LocalDate fechaTurno = requestDTO.getFecha();
@@ -186,7 +206,7 @@ public class JornadaValidator {
     }
 
     //10
-    public void validarMaximoEmpleadosPorConceptoYFecha(JornadaRequestDTO requestDTO) {
+    public void validarMaximoEmpleadosPorConceptoYFecha(JornadaRequest requestDTO) {
         LocalDate fecha = requestDTO.getFecha();
         Optional<Concepto> concepto = conceptoRepository.findById(requestDTO.getIdConcepto());
 
@@ -198,7 +218,7 @@ public class JornadaValidator {
     }
 
     //11
-    public void validarJornadaDuplicadaPorEyC(JornadaRequestDTO requestDTO) {
+    public void validarJornadaDuplicadaPorEyC(JornadaRequest requestDTO) {
         Optional<Empleado> empleado = empleadoRepository.findById(requestDTO.getIdEmpleado());
 
         Optional<Concepto> concepto = conceptoRepository.findById(requestDTO.getIdConcepto());

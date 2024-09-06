@@ -8,10 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface JornadasRepository extends JpaRepository<JornadaLaboral,Integer> {
+    List<JornadaLaboral> findAll();
 
     JornadaLaboral findByEmpleadoIdAndFecha(Long empleadoId, LocalDate fecha);
 
@@ -41,5 +43,20 @@ public interface JornadasRepository extends JpaRepository<JornadaLaboral,Integer
 
     @Query("SELECT COUNT(j) > 0 FROM JornadaLaboral j " + "WHERE j.empleado.id = :empleadoId " + "AND j.concepto.id = :conceptoId " + "AND j.fecha = :fechaTurno")
     boolean existsJornadaPorEmpleadoYConceptoYFecha(@Param("empleadoId") Long empleadoId, @Param("conceptoId") Long conceptoId, @Param("fechaTurno") LocalDate fechaTurno);
+
+    @Query("SELECT j FROM JornadaLaboral j WHERE j.fecha BETWEEN :fechaDesde AND :fechaHasta")
+    List<JornadaLaboral> findAllByFechaBetween(@Param("fechaDesde") LocalDate fechaDesde, @Param("fechaHasta") LocalDate fechaHasta);
+
+    @Query("SELECT j FROM JornadaLaboral j WHERE j.empleado.nroDocumento = :nroDocumento")
+    List<JornadaLaboral> findAllByEmpleadoNroDocumento(@Param("nroDocumento") String nroDocumento);
+
+    @Query("SELECT j FROM JornadaLaboral j WHERE j.empleado.nroDocumento = :nroDocumento " + "AND j.fecha BETWEEN :fechaDesde AND :fechaHasta")
+    List<JornadaLaboral> findAllByEmpleadoNroDocumentoAndFechaBetween(@Param("nroDocumento") String nroDocumento, @Param("fechaDesde") LocalDate fechaDesde, @Param("fechaHasta") LocalDate fechaHasta);
+
+    @Query("SELECT j FROM JornadaLaboral j WHERE j.fecha >= :fechaDesde")
+    List<JornadaLaboral> findAllByFechaDesde(@Param("fechaDesde") LocalDate fechaDesde);
+
+    @Query("SELECT j FROM JornadaLaboral j WHERE j.fecha <= :fechaHasta")
+    List<JornadaLaboral> findAllByFechaHasta(@Param("fechaHasta") LocalDate fechaHasta);
 
 }

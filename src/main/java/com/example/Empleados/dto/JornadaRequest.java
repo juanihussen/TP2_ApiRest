@@ -3,22 +3,20 @@ package com.example.Empleados.dto;
 import com.example.Empleados.entity.Concepto;
 import com.example.Empleados.entity.Empleado;
 import com.example.Empleados.entity.JornadaLaboral;
-import com.example.Empleados.exceptions.NotFoundException;
 import com.example.Empleados.repository.concepto.ConceptoRepository;
 import com.example.Empleados.repository.empleado.EmpleadoRepository;
-import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Setter
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class JornadaRequestDTO {
+public class JornadaRequest {
 
     @Autowired
     EmpleadoRepository empleadoRepository;
@@ -26,14 +24,15 @@ public class JornadaRequestDTO {
     @Autowired
     ConceptoRepository conceptoRepository;
 
+    @NotNull
     private Long idEmpleado;
 
+    @NotNull
     private Integer idConcepto;
 
     private LocalDate fecha;
 
     private Integer horasTrabajadas;
-
 
     public JornadaLaboral toEntity(Empleado empleado, Concepto concepto) {
         JornadaLaboral jornadaLaboral = new JornadaLaboral();
