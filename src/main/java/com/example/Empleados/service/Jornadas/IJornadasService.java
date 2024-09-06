@@ -12,4 +12,5 @@ public interface IJornadasService {
     JornadaLaboralDTO  crearJornadaLaboral(JornadaRequest requestDTO);
 
     List<JornadaLaboralDTO> findJornadas(String nroDocumento, LocalDate fechaDesde, LocalDate fechaHasta);
+
 }

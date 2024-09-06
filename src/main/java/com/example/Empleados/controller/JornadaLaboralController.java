@@ -28,10 +28,9 @@ public class JornadaLaboralController {
     }
 
     @GetMapping
-    public ResponseEntity<List<JornadaLaboralDTO>> obtenerJornadas(
-            @RequestParam(required = false) String nroDocumento,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaDesde,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaHasta) {
+    public ResponseEntity<List<JornadaLaboralDTO>> obtenerJornadas(@RequestParam(required = false) String nroDocumento,
+                                                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaDesde,
+                                                                   @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaHasta) {
 
         List<JornadaLaboralDTO> jornadas = jornadasService.findJornadas(nroDocumento, fechaDesde, fechaHasta);
         return ResponseEntity.ok(jornadas);

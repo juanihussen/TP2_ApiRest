@@ -255,6 +255,7 @@ public class JornadaValidator {
             throw new CustomBadRequestException("El campo 'nroDocumento' solo puede contener números enteros.");
         }
     }
+/*
 
     public void validarFormatoFechas(@RequestParam(required = false) LocalDate fechaDesde, LocalDate fechaHasta) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -262,6 +263,8 @@ public class JornadaValidator {
             throw new CustomBadRequestException("Los campos ‘fechaDesde’ y ‘fechaHasta’ deben respetar el formato yyyy-mm-dd.");
         }
     }
+
+ */
 
 
 

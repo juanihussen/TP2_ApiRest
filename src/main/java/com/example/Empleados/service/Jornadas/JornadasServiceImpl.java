@@ -48,9 +48,8 @@ public class JornadasServiceImpl implements IJornadasService{
     public List<JornadaLaboralDTO> findJornadas(String nroDocumento, LocalDate fechaDesde, LocalDate fechaHasta) {
         List<JornadaLaboral> jornadas;
 
-
         if (nroDocumento != null && fechaDesde != null && fechaHasta != null) {
-            jornadaValidator.validarFormatoFechas(fechaDesde,fechaHasta);
+            //jornadaValidator.validarFormatoFechas(fechaDesde,fechaHasta);
             jornadaValidator.validarTipoDatoNroDocumento(nroDocumento);
             jornadaValidator.validarFechaDesdeMenoraFechaHasta(fechaDesde,fechaHasta);
             jornadas = jornadasRepository.findAllByEmpleadoNroDocumentoAndFechaBetween(nroDocumento, fechaDesde, fechaHasta);
@@ -59,7 +58,7 @@ public class JornadasServiceImpl implements IJornadasService{
             jornadas = jornadasRepository.findAllByEmpleadoNroDocumento(nroDocumento);
         } else if (fechaDesde != null || fechaHasta != null) {
             if (fechaDesde != null && fechaHasta != null) {
-                jornadaValidator.validarFormatoFechas(fechaDesde,fechaHasta);
+                //jornadaValidator.validarFormatoFechas(fechaDesde,fechaHasta);
                 jornadaValidator.validarFechaDesdeMenoraFechaHasta(fechaDesde,fechaHasta);
                 jornadas = jornadasRepository.findAllByFechaBetween(fechaDesde, fechaHasta);
             } else if (fechaDesde != null) {

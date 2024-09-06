@@ -13,4 +13,6 @@ public interface EmpleadoRepository extends JpaRepository<Empleado,Long> {
 
     boolean existsByEmail(String email);
 
+    boolean deleteEmpleadoById(Long id);
+
 }

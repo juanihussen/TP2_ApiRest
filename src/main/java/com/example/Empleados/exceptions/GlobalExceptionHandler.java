@@ -38,7 +38,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Object> handleNotFoundException(NotFoundException ex, WebRequest request) {
         Map<String, Object> responseBody = new LinkedHashMap<>();
-        responseBody.put("timestamp", new Date());
         responseBody.put("status", ex.getStatus().value());
         responseBody.put("error", ex.getStatus().getReasonPhrase());
         responseBody.put("message", ex.getMessage());

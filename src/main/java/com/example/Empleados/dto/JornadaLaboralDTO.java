@@ -32,7 +32,6 @@ public class JornadaLaboralDTO {
         dto.setNombreCompleto(jornadaLaboral.getEmpleado().getNombre() + " " + jornadaLaboral.getEmpleado().getApellido());
         dto.setFecha(jornadaLaboral.getFecha());
         dto.setConcepto(jornadaLaboral.getConcepto().getNombre());
-        dto.setHsTrabajadas(jornadaLaboral.getHorasTrabajadas());
         dto.setHsTrabajadas(jornadaLaboral.getHorasTrabajadas() != null ? jornadaLaboral.getHorasTrabajadas() : null);
         return dto;
     }

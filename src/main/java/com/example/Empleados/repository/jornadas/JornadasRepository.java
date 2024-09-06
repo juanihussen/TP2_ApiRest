@@ -3,6 +3,7 @@ package com.example.Empleados.repository.jornadas;
 import com.example.Empleados.entity.Concepto;
 import com.example.Empleados.entity.JornadaLaboral;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,8 @@ import java.util.Optional;
 @Repository
 public interface JornadasRepository extends JpaRepository<JornadaLaboral,Integer> {
     List<JornadaLaboral> findAll();
+
+    Boolean existsByEmpleadoId(Long empleadoId);
 
     JornadaLaboral findByEmpleadoIdAndFecha(Long empleadoId, LocalDate fecha);
 
@@ -58,5 +61,9 @@ public interface JornadasRepository extends JpaRepository<JornadaLaboral,Integer
 
     @Query("SELECT j FROM JornadaLaboral j WHERE j.fecha <= :fechaHasta")
     List<JornadaLaboral> findAllByFechaHasta(@Param("fechaHasta") LocalDate fechaHasta);
+
+    @Modifying
+    @Query("DELETE FROM JornadaLaboral j WHERE j.empleado.id = :empleadoId")
+    void deleteByEmpleadoId(@Param("empleadoId") Long empleadoId);
 
 }

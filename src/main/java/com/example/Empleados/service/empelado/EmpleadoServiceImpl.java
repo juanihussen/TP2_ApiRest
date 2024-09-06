@@ -2,8 +2,10 @@ package com.example.Empleados.service.empelado;
 
 import com.example.Empleados.dto.EmpleadoDTO;
 import com.example.Empleados.entity.Empleado;
+import com.example.Empleados.exceptions.CustomBadRequestException;
 import com.example.Empleados.exceptions.NotFoundException;
 import com.example.Empleados.repository.empleado.EmpleadoRepository;
+import com.example.Empleados.repository.jornadas.JornadasRepository;
 import com.example.Empleados.validator.EmpleadoValidator;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 
     @Autowired
     EmpleadoRepository repository;
+    @Autowired
+    JornadasRepository jornadasRepository;
+
 
     @Autowired
     EmpleadoValidator validator;
@@ -39,10 +44,11 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
     }
 
     @Override
-    public void altaEmpleado(EmpleadoDTO empleadoDTO) throws BadRequestException {
+    public Empleado altaEmpleado(EmpleadoDTO empleadoDTO) throws BadRequestException {
         Empleado empleado = empleadoDTO.toEntity();
         validarEmpleado(empleado);
         this.repository.save(empleado);
+        return empleado;
     }
 
     @Override
@@ -75,6 +81,23 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 
         return empleadoEncontrado.toDTO();
     }
+
+
+    @Override
+    public void deleteEmpleadoById(Long id) {
+        Optional<Empleado> empleado = repository.findById(id);
+
+        if (!empleado.isPresent()) {
+            throw new NotFoundException("No se encontró el empleado con Id: " + id);
+        }
+        if (jornadasRepository.existsByEmpleadoId(id)) {
+            throw new CustomBadRequestException("No es posible eliminar un empleado con jornadas asociadas.");
+        }
+
+        repository.deleteById(id);
+    }
+
+
 
     public void validarEmpleado(Empleado empleado) throws BadRequestException {
         validator.validarEmailUnico(empleado.getEmail());
