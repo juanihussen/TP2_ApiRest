@@ -35,9 +35,6 @@ public class JornadasServiceImpl implements IJornadasService{
     public JornadaLaboralDTO crearJornadaLaboral(JornadaRequest requestDTO) {
         Empleado empleado = jornadaValidator.findEmpleadoById(requestDTO.getIdEmpleado());
         Concepto concepto = jornadaValidator.findConceptoById(requestDTO.getIdConcepto());
-
-
-
         validacionJornada(requestDTO);
         JornadaLaboral jornadaLaboral = requestDTO.toEntity(empleado, concepto);
         jornadasRepository.save(jornadaLaboral);
@@ -49,7 +46,6 @@ public class JornadasServiceImpl implements IJornadasService{
         List<JornadaLaboral> jornadas;
 
         if (nroDocumento != null && fechaDesde != null && fechaHasta != null) {
-            //jornadaValidator.validarFormatoFechas(fechaDesde,fechaHasta);
             jornadaValidator.validarTipoDatoNroDocumento(nroDocumento);
             jornadaValidator.validarFechaDesdeMenoraFechaHasta(fechaDesde,fechaHasta);
             jornadas = jornadasRepository.findAllByEmpleadoNroDocumentoAndFechaBetween(nroDocumento, fechaDesde, fechaHasta);
@@ -58,7 +54,6 @@ public class JornadasServiceImpl implements IJornadasService{
             jornadas = jornadasRepository.findAllByEmpleadoNroDocumento(nroDocumento);
         } else if (fechaDesde != null || fechaHasta != null) {
             if (fechaDesde != null && fechaHasta != null) {
-                //jornadaValidator.validarFormatoFechas(fechaDesde,fechaHasta);
                 jornadaValidator.validarFechaDesdeMenoraFechaHasta(fechaDesde,fechaHasta);
                 jornadas = jornadasRepository.findAllByFechaBetween(fechaDesde, fechaHasta);
             } else if (fechaDesde != null) {
@@ -91,8 +86,5 @@ public class JornadasServiceImpl implements IJornadasService{
         jornadaValidator.validarMaximoDiasLibresEnMes(requestDTO);
         jornadaValidator.validarMaximoEmpleadosPorConceptoYFecha(requestDTO);
         jornadaValidator.validarJornadaDuplicadaPorEyC(requestDTO);
-
-
-
     }
 }

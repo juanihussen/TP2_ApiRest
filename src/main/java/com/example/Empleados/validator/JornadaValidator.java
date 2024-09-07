@@ -11,8 +11,10 @@ import com.example.Empleados.repository.empleado.EmpleadoRepository;
 import com.example.Empleados.repository.jornadas.JornadasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -255,16 +257,7 @@ public class JornadaValidator {
             throw new CustomBadRequestException("El campo 'nroDocumento' solo puede contener números enteros.");
         }
     }
-/*
 
-    public void validarFormatoFechas(@RequestParam(required = false) LocalDate fechaDesde, LocalDate fechaHasta) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        if(fechaDesde == null || fechaHasta == null){
-            throw new CustomBadRequestException("Los campos ‘fechaDesde’ y ‘fechaHasta’ deben respetar el formato yyyy-mm-dd.");
-        }
-    }
-
- */
 
 
 
