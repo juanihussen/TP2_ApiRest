@@ -15,7 +15,7 @@ Esta es una aplicación para gestionar empleados y sus jornadas laborales. Para 
 
    - Clona el repositorio en tu máquina.
    - Asegúrate de tener configurado el entorno de desarrollo con las dependencias necesarias.
-   - Ejecuta la aplicación con tu herramienta preferida (por ejemplo, utilizando `mvn spring-boot:run` para una aplicación Spring Boot).
+   - Ejecuta la aplicación y sus querys con el archivo PostMan brindado.
 
 2. **Crear un Empleado**  
    La primera acción que debes realizar es crear un empleado. Para ello, sigue los pasos en la API o en la interfaz:
