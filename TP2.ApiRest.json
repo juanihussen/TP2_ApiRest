@@ -1,0 +1,2041 @@
+{
+	"info": {
+		"_postman_id": "1926a146-1462-4287-b09e-9497f51fe304",
+		"name": "TP2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34176587",
+		"_collection_link": "https://api444-0924.postman.co/workspace/API-Workspace~8f812c0f-0b41-4634-870b-cb41038dd94d/collection/34176587-1926a146-1462-4287-b09e-9497f51fe304?action=share&source=collection_link&creator=34176587"
+	},
+	"item": [
+		{
+			"name": "Alta empleado",
+			"item": [
+				{
+					"name": "agregarEmpleado (Exitoso)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 798456,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzote@gmail.com\",\r\n  \"fechaNacimiento\": \"1998-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}\r\n/*{\r\n  \"nroDocumento\": 123456,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1998-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}*/\r\n/*{\r\n  \"nroDocumento\": 789456,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotell@gmail.com\",\r\n  \"fechaNacimiento\": \"1998-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}\r\n*/",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (edad menor a 18)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 30415654,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotella@gmail.com\",\r\n  \"fechaNacimiento\": \"2020-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (mismo número de documento)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n\"nroDocumento\": 30415654,\r\n\"nombre\": \"German\",\r\n\"apellido\": \"Zotella\",\r\n\"email\": \"gzotella@gmail.com\",\r\n\"fechaNacimiento\": \"1999-08-06\",\r\n\"fechaIngreso\": \"2019-06-04\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (mismo email)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 123456,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotella@gmail.com\",\r\n  \"fechaNacimiento\": \"2020-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (fecha ingreso posterior a dia de la fecha)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 789456,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2025-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (fecha nacimiento posterior a dia de la fecha)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"2025-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (email invalido)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 25874,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"pepe\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (solo se permiten letras en el campo nombre)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"454\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (solo se permiten letras en el campo apellido)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"45\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (campo obligatorio nombre)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"\",\r\n  \"apellido\": \"pepe\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (campo obligatorio apellido)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (campo obligatorio numero de documento)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": null,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Pepe\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (campo obligatorio email)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Pepe\",\r\n  \"email\": \"\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (campo obligatorio fecha nacimiento)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Pepe\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarEmpleado (campo obligatorio fecha ingreso)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Pepe\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Obtener empleados",
+			"item": [
+				{
+					"name": "Obtener empleados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Obtener información empleado",
+			"item": [
+				{
+					"name": "obtenerPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerPorId (empleado no encontrado)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/empleado/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Actualizar Empleado",
+			"item": [
+				{
+					"name": "ActualizarEmpleado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 30415654,\r\n  \"nombre\": \"Pepe\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotella@gmail.com\",\r\n  \"fechaNacimiento\": \"1998-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado (empleado inexistente)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 30415654,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotella@gmail.com\",\r\n  \"fechaNacimiento\": \"1998-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado (edad menor a 18)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 30415654,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotella@gmail.com\",\r\n  \"fechaNacimiento\": \"2020-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado (campo obligatorio fecha ingreso)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Pepe\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado(campo obligatorio fecha nacimiento)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Pepe\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado(campo obligatorio email)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Pepe\",\r\n  \"email\": \"\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado(campo obligatorio numero de documento)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": null,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Pepe\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado (campo obligatorio apellido)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado (campo obligatorio nombre)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"\",\r\n  \"apellido\": \"pepe\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado(solo se permiten letras en el campo apellido)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"45\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado (solo se permiten letras en el campo nombre)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"454\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado (email invalido)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 25874,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"pepe\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado (fecha nacimiento posterior a dia de la fecha)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 753241,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"2025-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado (fecha ingreso posterior a dia de la fecha)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 789456,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotel@gmail.com\",\r\n  \"fechaNacimiento\": \"1999-08-06\",\r\n  \"fechaIngreso\": \"2025-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado (mismo email)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nroDocumento\": 123456,\r\n  \"nombre\": \"German\",\r\n  \"apellido\": \"Zotella\",\r\n  \"email\": \"gzotella@gmail.com\",\r\n  \"fechaNacimiento\": \"2020-08-06\",\r\n  \"fechaIngreso\": \"2019-06-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarEmpleado (mismo número de documento)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n\"nroDocumento\": 30415654,\r\n\"nombre\": \"German\",\r\n\"apellido\": \"Zotella\",\r\n\"email\": \"gzotella@gmail.com\",\r\n\"fechaNacimiento\": \"1999-08-06\",\r\n\"fechaIngreso\": \"2019-06-04\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Obtener Concepto Laboral",
+			"item": [
+				{
+					"name": "ObtenerConcepto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/concepto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"concepto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerConcepto (id valido)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/concepto?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"concepto"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerConcepto (nombre valido)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/concepto?nombre=Día Libre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"concepto"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "Día Libre"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerConcepto (busqueda ambos parametros)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/concepto?nombre=Turno Extra&id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"concepto"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "Turno Extra"
+								},
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerConcepto (filtros no coinciden)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/concepto?nombre=sdfsdf&id=100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"concepto"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "sdfsdf"
+								},
+								{
+									"key": "id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alta jornada laboral",
+			"item": [
+				{
+					"name": "agregarJornada",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (campo obligatorio idEmpleado)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": null,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (campo obligatorio idConcepto)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": null,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (campo obligatorio fecha)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"\",\r\n  \"horasTrabajadas\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (horasTrabajadas obligatorias turno normal)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (horasTrabajadas obligatorias turno extra)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (dia libre no requiere hsTrabajadas)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (no existe empleado)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 100,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (no existe concepto)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 300,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (rango de horas invalido)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (jornada no supere 14 horas diarias)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 8\r\n}\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 6\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 6\r\n}*/",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (jornada no supere 52 horas semanales)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-08\",\r\n  \"horasTrabajadas\": 8\r\n}\r\n/*\r\n{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-04\",\r\n  \"horasTrabajadas\": 8\r\n}\r\n{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-05\",\r\n  \"horasTrabajadas\": 8\r\n}\r\n{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-06\",\r\n  \"horasTrabajadas\": 8\r\n}\r\n{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-07\",\r\n  \"horasTrabajadas\": 8\r\n}\r\n{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-08\",\r\n  \"horasTrabajadas\": 6\r\n}\r\n{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-09\",\r\n  \"horasTrabajadas\": 6\r\n}\r\n{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-10\",\r\n  \"horasTrabajadas\": 6\r\n}*/\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (jornada no supere 190 horas mensuales)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 8\r\n}\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 6\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 6\r\n}*/",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (el empleado no puede agregar otra jornada si tiene dia libre)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": null\r\n}\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-01\",\r\n  \"horasTrabajadas\": 8\r\n}*/\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (el empleado no puede agregar otra jornada si tiene dia libre) Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-03\",\r\n  \"horasTrabajadas\": null\r\n}\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-04\",\r\n  \"horasTrabajadas\": null\r\n}*/\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (no se puede cargar 3 turnos extras a las semana)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-03\",\r\n  \"horasTrabajadas\": 6\r\n}\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-04\",\r\n  \"horasTrabajadas\": 6\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-05\",\r\n  \"horasTrabajadas\": 6\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 2,\r\n  \"fecha\": \"2023-01-06\",\r\n  \"horasTrabajadas\": 6\r\n}*/\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (no se puede cargar 5 turnos normales a las semana)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-08\",\r\n  \"horasTrabajadas\": 8\r\n}\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-04\",\r\n  \"horasTrabajadas\": 8\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-05\",\r\n  \"horasTrabajadas\": 8\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-06\",\r\n  \"horasTrabajadas\": 8\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-07\",\r\n  \"horasTrabajadas\": 8\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-08\",\r\n  \"horasTrabajadas\": 8\r\n}*/\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (el empleado no puede tener mas de 2 dias libres en la semana)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-03\",\r\n  \"horasTrabajadas\": null\r\n}\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-04\",\r\n  \"horasTrabajadas\": null\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-05\",\r\n  \"horasTrabajadas\": null\r\n}*/\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (el empleado no puede tener mas de 5 dias libres al mes)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-03\",\r\n  \"horasTrabajadas\": null\r\n}\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-12\",\r\n  \"horasTrabajadas\": null\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-13\",\r\n  \"horasTrabajadas\": null\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-20\",\r\n  \"horasTrabajadas\": null\r\n}*//*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-21\",\r\n  \"horasTrabajadas\": null\r\n}*//*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 3,\r\n  \"fecha\": \"2023-01-30\",\r\n  \"horasTrabajadas\": null\r\n}*/\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (existen dos empleados registrados con el mismo concepto)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-03\",\r\n  \"horasTrabajadas\": 8\r\n}\r\n/*{\r\n  \"idEmpleado\": 2,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-03\",\r\n  \"horasTrabajadas\": 8\r\n}*/\r\n/*{\r\n  \"idEmpleado\": 3,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-03\",\r\n  \"horasTrabajadas\": 8\r\n}*/\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregarJornada (un empleado no puede cargar dos jornadas con el mismo concepto)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-03\",\r\n  \"horasTrabajadas\": 8\r\n}\r\n/*{\r\n  \"idEmpleado\": 1,\r\n  \"idConcepto\": 1,\r\n  \"fecha\": \"2023-01-03\",\r\n  \"horasTrabajadas\": 6\r\n}*/\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Eliminar empleado",
+			"item": [
+				{
+					"name": "eliminarEmpleado",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/empleado/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminarEmpleado (empleado con jornadas asociadas)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminarEmpleado (empleado no encontrado)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/empleado/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empleado",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mostrar Jornadas",
+			"item": [
+				{
+					"name": "Mostrar Jornadas sin parametros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jornada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jornada desdeFecha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jornada?fechaDesde=2023-01-01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							],
+							"query": [
+								{
+									"key": "fechaDesde",
+									"value": "2023-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jornada hastaFecha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jornada?fechaHasta=2023-01-01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							],
+							"query": [
+								{
+									"key": "fechaHasta",
+									"value": "2023-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jornada nroDocumento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jornada?nroDocumento=1212",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							],
+							"query": [
+								{
+									"key": "nroDocumento",
+									"value": "1212"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jornada nroDocumento fechaDesde y fechaHasta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jornada?nroDocumento=1212&fechaHasta=2023-01-01&fechaDesde=2023-01-01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							],
+							"query": [
+								{
+									"key": "nroDocumento",
+									"value": "1212"
+								},
+								{
+									"key": "fechaHasta",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "fechaDesde",
+									"value": "2023-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jornada fechaDesde y fechaHasta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jornada?fechaHasta=2023-01-01&fechaDesde=2023-01-01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							],
+							"query": [
+								{
+									"key": "fechaHasta",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "fechaDesde",
+									"value": "2023-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jornada Params no validos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jornada?fechaHasta=2024-01-01&fechaDesde=2020-01-01&nroDocumento=111",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							],
+							"query": [
+								{
+									"key": "fechaHasta",
+									"value": "2024-01-01"
+								},
+								{
+									"key": "fechaDesde",
+									"value": "2020-01-01"
+								},
+								{
+									"key": "nroDocumento",
+									"value": "111"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jornada Formato Fecha no validos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jornada?fechaHasta=12&fechaDesde=kkk",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							],
+							"query": [
+								{
+									"key": "fechaHasta",
+									"value": "12"
+								},
+								{
+									"key": "fechaDesde",
+									"value": "kkk"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jornada decimales en documento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jornada?nroDocumento=1212.23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							],
+							"query": [
+								{
+									"key": "nroDocumento",
+									"value": "1212.23"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jornada fechaDesde > fechaHasta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/jornada?fechaHasta=2023-01-01&fechaDesde=2024-01-01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jornada"
+							],
+							"query": [
+								{
+									"key": "fechaHasta",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "fechaDesde",
+									"value": "2024-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -4,6 +4,7 @@ import com.example.Empleados.exceptions.CustomBadRequestException;
 import com.example.Empleados.repository.empleado.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.coyote.BadRequestException;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -18,19 +19,9 @@ public class EmpleadoValidator {
 
 
     public void validarEdad(LocalDate fechaNacimiento) throws CustomBadRequestException {
-        if(fechaNacimiento == null){
-            throw new CustomBadRequestException("Es necesaro que coloques una fecha de nacimiento.");
-        } else {
-            int edadEmpleado = Period.between(fechaNacimiento, LocalDate.now()).getYears();
-            if (edadEmpleado < 18) {
-                throw new ConflictException("La edad del empleado no puede ser menor a 18 años.");
-            }
-        }
-    }
-
-    public void validarDocumentoNotNull(Integer documentoEmpleado) {
-        if(documentoEmpleado == null){
-            throw new ConflictException("Es necesario que ingrese un numero de documento para crear un empleado. ");
+        int edadEmpleado = Period.between(fechaNacimiento, LocalDate.now()).getYears();
+        if (edadEmpleado < 18) {
+            throw new ConflictException("La edad del empleado no puede ser menor a 18 años.");
         }
     }
 
@@ -47,22 +38,12 @@ public class EmpleadoValidator {
     }
 
 
-    public void validarEmailNotNull(String emailEmpleado) {
-        if(emailEmpleado == null){
-            throw new ConflictException("Es necesario que ingrese un email para crear un empleado. ");
-        }
-    }
-
     public void validarFechas(LocalDate fechaIngresoEmpleado, LocalDate fechaNacimiento) throws CustomBadRequestException {
-        if(fechaIngresoEmpleado == null){
-            throw new CustomBadRequestException("Es necesario que ingrese la fecha de ingreso para crear un empleado. ");
-        } else {
-            if(fechaIngresoEmpleado.isAfter(LocalDate.now())){
-                throw new CustomBadRequestException("La fecha de ingreso no puede ser posterior al día de la fecha.");
-            }
-            if(fechaNacimiento.isAfter(LocalDate.now())){
-                throw new CustomBadRequestException("La fecha de nacimiento no puede ser posterior al día de la fecha.");
-            }
+        if(fechaIngresoEmpleado.isAfter(LocalDate.now())){
+            throw new CustomBadRequestException("La fecha de ingreso no puede ser posterior al día de la fecha.");
+        }
+        if(fechaNacimiento.isAfter(LocalDate.now())){
+            throw new CustomBadRequestException("La fecha de nacimiento no puede ser posterior al día de la fecha.");
         }
     }
 
@@ -73,5 +54,24 @@ public class EmpleadoValidator {
         }
     }
 
-
+    public void validarCamposVacios(Integer documentoEmpleado, String nombre, String apellido, String mail, LocalDate fechaNacimiento, LocalDate fehcaIngreso) {
+        if(documentoEmpleado == null){
+            throw new ConflictException("Es necesario que ingrese un numero de documento para crear un empleado. ");
+        }
+        if(nombre.isEmpty()) {
+            throw new ConflictException("Es necesario que ingrese un nombre para crear un empleado. ");
+        }
+        if(apellido.isEmpty()) {
+            throw new ConflictException("Es necesario que ingrese un apellido para crear un empleado. ");
+        }
+        if(mail.isEmpty()) {
+            throw new ConflictException("Es necesario que ingrese un mail para crear un empleado. ");
+        }
+        if(fechaNacimiento == null){
+            throw new ConflictException("Es necesario que ingrese una fechaNacimiento para crear un empleado. ");
+        }
+        if(fehcaIngreso == null){
+            throw new ConflictException("Es necesario que ingrese una fehcaIngreso para crear un empleado. ");
+        }
+    }
 }

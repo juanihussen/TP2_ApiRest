@@ -150,7 +150,7 @@ public class JornadaValidator {
 
     }
 
-    public void validarMaximoTurnosEnSemana(JornadaRequest requestDTO) {
+    public void validarMaximoTurnosEnSemana(JornadaRequest requestDTO) throws CustomBadRequestException {
         Optional<Empleado> empleado = empleadoRepository.findById(requestDTO.getIdEmpleado());
 
         LocalDate fechaTurno = requestDTO.getFecha();
@@ -165,7 +165,7 @@ public class JornadaValidator {
             throw new CustomBadRequestException("El empleado ingresado ya cuenta con 3 turnos extra esta semana.");
         }
         if (cantidadTurnosNormal == 5) {
-            throw new CustomBadRequestException("El empleado ingresado ya cuenta con 3 turnos normales esta semana.");
+            throw new CustomBadRequestException("El empleado ingresado ya cuenta con 5 turnos normales esta semana.");
         }
     }
 
@@ -182,7 +182,6 @@ public class JornadaValidator {
             throw new CustomBadRequestException("El empleado no cuenta con más días libres esta semana.");
         }
     }
-
 
     public void validarMaximoDiasLibresEnMes(JornadaRequest requestDTO) {
         Optional<Empleado> empleado = empleadoRepository.findById(requestDTO.getIdEmpleado());

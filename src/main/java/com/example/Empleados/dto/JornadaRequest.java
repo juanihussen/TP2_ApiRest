@@ -24,9 +24,7 @@ public class JornadaRequest {
     @Autowired
     ConceptoRepository conceptoRepository;
 
-
     private Long idEmpleado;
-
 
     private Integer idConcepto;
 

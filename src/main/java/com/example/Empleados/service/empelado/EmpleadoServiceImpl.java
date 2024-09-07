@@ -11,6 +11,7 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,14 +63,14 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
             validator.validarEmailUnico(empleadoActualizado.getEmail());
             empleadoEncontrado.setEmail(empleadoActualizado.getEmail());
         }
-        validator.validarDocumentoNotNull(empleadoActualizado.getNroDocumento());
+        validator.validarCamposVacios(empleadoActualizado.getNroDocumento(), empleadoActualizado.getNombre(), empleadoActualizado.getApellido(), empleadoActualizado.getEmail(), empleadoActualizado.getFechaNacimiento(), empleadoActualizado.getFechaIngreso());
         if (!empleadoActualizado.getNroDocumento().equals(empleadoEncontrado.getNroDocumento())) {
             validator.validarDocumentoUnico(empleadoActualizado.getNroDocumento());
             empleadoEncontrado.setNroDocumento(empleadoActualizado.getNroDocumento());
         }
 
-        validator.validarEdad(empleadoActualizado.getFechaNacimiento());
         validator.validarFechas(empleadoActualizado.getFechaIngreso(), empleadoActualizado.getFechaNacimiento());
+        validator.validarEdad(empleadoActualizado.getFechaNacimiento());
         validator.validarSoloLetrasEnNombreYApellido("nombre", empleadoActualizado.getNombre());
         validator.validarSoloLetrasEnNombreYApellido("apellido", empleadoActualizado.getApellido());
 
@@ -101,12 +102,11 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 
 
     public void validarEmpleado(Empleado empleado) throws BadRequestException {
+        validator.validarCamposVacios(empleado.getNroDocumento(), empleado.getNombre(), empleado.getApellido(), empleado.getEmail(), empleado.getFechaNacimiento(), empleado.getFechaIngreso());
         validator.validarEmailUnico(empleado.getEmail());
-        validator.validarEmailNotNull(empleado.getEmail());
-        validator.validarDocumentoNotNull(empleado.getNroDocumento());
         validator.validarDocumentoUnico(empleado.getNroDocumento());
-        validator.validarEdad(empleado.getFechaNacimiento());
         validator.validarFechas(empleado.getFechaIngreso(),empleado.getFechaNacimiento());
+        validator.validarEdad(empleado.getFechaNacimiento());
         validator.validarSoloLetrasEnNombreYApellido("nombre",empleado.getNombre());
         validator.validarSoloLetrasEnNombreYApellido("apellido",empleado.getApellido());
     }
