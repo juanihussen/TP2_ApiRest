@@ -24,10 +24,10 @@ public class JornadaRequest {
     @Autowired
     ConceptoRepository conceptoRepository;
 
-    @NotNull
+
     private Long idEmpleado;
 
-    @NotNull
+
     private Integer idConcepto;
 
     private LocalDate fecha;

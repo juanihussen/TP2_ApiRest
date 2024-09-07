@@ -28,7 +28,8 @@ public class EmpleadoDTO {
     private String email;
     private LocalDate fechaNacimiento;
     private LocalDate fechaIngreso;
-    private LocalDateTime fechaCreacion;
+    private LocalDate fechaCreacion;
+
 
     public  Empleado toEntity() {
         Empleado empleado = new Empleado();
@@ -39,7 +40,6 @@ public class EmpleadoDTO {
         empleado.setNroDocumento(this.getNroDocumento());
         empleado.setFechaNacimiento(this.getFechaNacimiento());
         empleado.setFechaIngreso(this.getFechaIngreso());
-        empleado.setFechaCreacion(this.getFechaCreacion());
         return empleado;
     }
 }

@@ -26,16 +26,6 @@ public class ConceptoDTO {
 
     private boolean laborable;
 
-    public Concepto toEntity() {
-        Concepto concepto = new Concepto();
-        concepto.setId(this.getId());
-        concepto.setNombre(this.getNombre());
-        concepto.setHsMinimo(this.getHsMinimo());
-        concepto.setHsMAximo(this.getHsMAximo());
-        concepto.setLaborable((this.isLaborable()));
-        return concepto;
-    }
-
 }
 
 

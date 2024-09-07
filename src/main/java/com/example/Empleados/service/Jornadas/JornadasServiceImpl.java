@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +37,7 @@ public class JornadasServiceImpl implements IJornadasService{
         Empleado empleado = jornadaValidator.findEmpleadoById(requestDTO.getIdEmpleado());
         Concepto concepto = jornadaValidator.findConceptoById(requestDTO.getIdConcepto());
         validacionJornada(requestDTO);
+
         JornadaLaboral jornadaLaboral = requestDTO.toEntity(empleado, concepto);
         jornadasRepository.save(jornadaLaboral);
         return JornadaLaboralDTO.toDTO(jornadaLaboral);
@@ -49,7 +51,7 @@ public class JornadasServiceImpl implements IJornadasService{
             jornadaValidator.validarTipoDatoNroDocumento(nroDocumento);
             jornadaValidator.validarFechaDesdeMenoraFechaHasta(fechaDesde,fechaHasta);
             jornadas = jornadasRepository.findAllByEmpleadoNroDocumentoAndFechaBetween(nroDocumento, fechaDesde, fechaHasta);
-        } else if (nroDocumento != null) {
+        } else if (nroDocumento != null && fechaDesde == null && fechaHasta == null) {
             jornadaValidator.validarTipoDatoNroDocumento(nroDocumento);
             jornadas = jornadasRepository.findAllByEmpleadoNroDocumento(nroDocumento);
         } else if (fechaDesde != null || fechaHasta != null) {
@@ -58,6 +60,7 @@ public class JornadasServiceImpl implements IJornadasService{
                 jornadas = jornadasRepository.findAllByFechaBetween(fechaDesde, fechaHasta);
             } else if (fechaDesde != null) {
                 jornadas = jornadasRepository.findAllByFechaDesde(fechaDesde);
+
             } else {
                 jornadas = jornadasRepository.findAllByFechaHasta(fechaHasta);
             }
@@ -71,10 +74,9 @@ public class JornadasServiceImpl implements IJornadasService{
                 .collect(Collectors.toList());
     }
 
-
     public void validacionJornada(JornadaRequest requestDTO) {
-        jornadaValidator.validarDiaLibreEnFechaLuegoDeTurno(requestDTO);
         jornadaValidator.validarCamposRequeridos(requestDTO);
+        jornadaValidator.validarDiaLibreEnFechaLuegoDeTurno(requestDTO);
         jornadaValidator.validarTurnosSinHorasTrabajadas(requestDTO);
         jornadaValidator.validarHorasDiaLibre(requestDTO);
         jornadaValidator.validarRangoHorasIngresadas(requestDTO);

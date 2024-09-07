@@ -62,6 +62,7 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
             validator.validarEmailUnico(empleadoActualizado.getEmail());
             empleadoEncontrado.setEmail(empleadoActualizado.getEmail());
         }
+        validator.validarDocumentoNotNull(empleadoActualizado.getNroDocumento());
         if (!empleadoActualizado.getNroDocumento().equals(empleadoEncontrado.getNroDocumento())) {
             validator.validarDocumentoUnico(empleadoActualizado.getNroDocumento());
             empleadoEncontrado.setNroDocumento(empleadoActualizado.getNroDocumento());

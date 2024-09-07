@@ -1,11 +1,13 @@
 package com.example.Empleados.entity;
 
 import com.example.Empleados.dto.EmpleadoDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Setter
 @Getter
@@ -39,13 +41,15 @@ public class Empleado {
     private LocalDate fechaIngreso;
 
     @Column(name = "fecha_creacion", updatable = false)
+
     private LocalDateTime fechaCreacion;
 
     @PrePersist
-    protected void onCreate() {
-        this.fechaCreacion = LocalDateTime.now();
+    public void prePersist() {
+        if (fechaCreacion == null) {
+            fechaCreacion = LocalDateTime.now();
+        }
     }
-
     public EmpleadoDTO toDTO() {
         EmpleadoDTO dto = new EmpleadoDTO();
         dto.setEmpleadoId(this.getId());
@@ -55,7 +59,8 @@ public class Empleado {
         dto.setNroDocumento((this.getNroDocumento()));
         dto.setFechaNacimiento(this.getFechaNacimiento());
         dto.setFechaIngreso(this.getFechaIngreso());
-        dto.setFechaCreacion(this.getFechaCreacion());
+        dto.setFechaCreacion(this.getFechaCreacion() != null ? this.getFechaCreacion().toLocalDate() : null);
+
         return dto;
     }
 

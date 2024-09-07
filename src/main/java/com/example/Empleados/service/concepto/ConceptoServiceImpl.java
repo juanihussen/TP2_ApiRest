@@ -29,20 +29,23 @@ public class ConceptoServiceImpl implements IConceptoService {
         if (id != null && nombre == null) {
             Optional<Concepto> concepto = this.repository.findById(id);
             if (concepto.isPresent()) {
-                if(concepto.get().getHsMinimo() != null && concepto.get().getHsMAximo() != null){
-                    conceptos.add(concepto.get());
-                }
+                conceptos.add(concepto.get());
             }
         } else if (id == null && nombre != null) {
             Optional<Concepto> concepto = this.repository.findByNombre(nombre);
             if (concepto.isPresent()) {
-                if(concepto.get().getHsMinimo() != null && concepto.get().getHsMAximo() != null){
-                    conceptos.add(concepto.get());
-                }
                 conceptos.add(concepto.get());
             }
-        } else {
+        } else if (id == null && nombre == null){
             conceptos = this.repository.findAll();
+        }else {
+            Optional<Concepto> conceptoNombre = this.repository.findByNombre(nombre);
+            Optional<Concepto> conceptoId = this.repository.findById(id);
+            if (conceptoNombre.isPresent() && conceptoId.isPresent()) {
+                if(conceptoNombre.equals(conceptoId)){
+                    conceptos.add(conceptoId.get());
+                }
+            }
         }
 
         return conceptos.stream().map(Concepto::toDTO).collect(Collectors.toList());

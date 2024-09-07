@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -48,11 +49,12 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex, WebRequest request) {
-        Map<String, Object> responseBody = new LinkedHashMap<>();
-        responseBody.put("status", HttpStatus.BAD_REQUEST);
-        responseBody.put("message", "Los campos ‘fechaDesde’ y ‘fechaHasta’ deben respetar el formato yyyy-MM-dd.");
-        return new ResponseEntity<>(responseBody, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<String> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+        if (ex.getRequiredType() != null && ex.getRequiredType().equals(LocalDate.class)) {
+            String errorMessage = "Los campos ‘fechaDesde’ y ‘fechaHasta’ deben respetar el formato yyyy-mm-dd.";
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+        }
+        throw ex;
     }
 
 }

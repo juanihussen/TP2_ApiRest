@@ -1,5 +1,6 @@
 package com.example.Empleados.validator;
 import com.example.Empleados.exceptions.ConflictException;
+import com.example.Empleados.exceptions.CustomBadRequestException;
 import com.example.Empleados.repository.empleado.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.coyote.BadRequestException;
@@ -16,10 +17,9 @@ public class EmpleadoValidator {
     private EmpleadoRepository repository;
 
 
-    //H001 validations
-    public void validarEdad(LocalDate fechaNacimiento) throws BadRequestException {
+    public void validarEdad(LocalDate fechaNacimiento) throws CustomBadRequestException {
         if(fechaNacimiento == null){
-            throw new com.example.Empleados.exceptions.CustomBadRequestException("Es necesarop que coloques una fecha de nacimiento.");
+            throw new CustomBadRequestException("Es necesaro que coloques una fecha de nacimiento.");
         } else {
             int edadEmpleado = Period.between(fechaNacimiento, LocalDate.now()).getYears();
             if (edadEmpleado < 18) {
@@ -53,23 +53,23 @@ public class EmpleadoValidator {
         }
     }
 
-    public void validarFechas(LocalDate fechaIngresoEmpleado, LocalDate fechaNacimiento) throws BadRequestException {
+    public void validarFechas(LocalDate fechaIngresoEmpleado, LocalDate fechaNacimiento) throws CustomBadRequestException {
         if(fechaIngresoEmpleado == null){
-            throw new BadRequestException("Es necesario que ingrese la fecha de ingreso para crear un empleado. ");
+            throw new CustomBadRequestException("Es necesario que ingrese la fecha de ingreso para crear un empleado. ");
         } else {
             if(fechaIngresoEmpleado.isAfter(LocalDate.now())){
-                throw new BadRequestException("La fecha de ingreso no puede ser posterior al día de la fecha.");
+                throw new CustomBadRequestException("La fecha de ingreso no puede ser posterior al día de la fecha.");
             }
             if(fechaNacimiento.isAfter(LocalDate.now())){
-                throw new BadRequestException("La fecha de nacimiento no puede ser posterior al día de la fecha.");
+                throw new CustomBadRequestException("La fecha de nacimiento no puede ser posterior al día de la fecha.");
             }
         }
     }
 
-    public void validarSoloLetrasEnNombreYApellido(String campo, String valor) throws BadRequestException {
+    public void validarSoloLetrasEnNombreYApellido(String campo, String valor) throws CustomBadRequestException {
         Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
         if (!pattern.matcher(valor).matches()) {
-            throw new BadRequestException("Solo se permiten letras en el campo '" + campo + "'");
+            throw new CustomBadRequestException("Solo se permiten letras en el campo '" + campo + "'");
         }
     }
 
